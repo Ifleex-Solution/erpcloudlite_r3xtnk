@@ -402,7 +402,9 @@ IF(a.status = 1, 'Active', 'Inactive') as status_label,s.name as sname");
             if ($this->permission1->method('manage_product', 'update')->access()) {
                 $button .= ' <a href="' . $base_url . 'product_form/' . $record->id . '" class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="left" title="' . display('update') . '"><i class="fa fa-pencil" aria-hidden="true"></i></a>';
             }
-            if ($this->permission1->method('manage_product', 'delete')->access()) {
+               $button .= '  <a href="' . $base_url . 'barcode/' . $record->product_id . '" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="left" title="' . display('barcode') . '"><i class="fa fa-barcode" aria-hidden="true"></i></a>';
+             $button .= '  <a href="' . $base_url . 'qrcode/' . $record->product_id . '" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="left" title="' . display('qr_code') . '"><i class="fa fa-qrcode" aria-hidden="true"></i></a>';
+               if ($this->permission1->method('manage_product', 'delete')->access()) {
 
                 $button .= '  <a href="' . $base_url . 'product/product/bdtask_deleteproduct/' . $record->id . '" class="btn btn-xs btn-danger "  onclick="' . $jsaction . '"><i class="fa fa-trash"></i></a>';
             }
