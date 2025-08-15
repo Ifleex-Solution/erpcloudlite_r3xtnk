@@ -67,7 +67,8 @@
 
                                                     <div class="barcode-inner barcode-innerdiv">
                                                         <div class="product-name barcode-productname">
-                                                            <?php echo $company_name;?>
+                                                           R3XTNK BROTHERS (PVT) LTD
+
                                                         </div>
                                                         <span class="model-name barcode-modelname"><?php echo $product_model?></span>
                                                         <img class="img-responsive center-block barcode-image" alt="" src="<?= base_url('vendor/barcode.php?size=30&text='.$product_id.'&print=true')?>" >
@@ -109,7 +110,7 @@
                                                 <td class="barcode-toptd">  
                                                     <div class="barcode-inner barcode-innerdiv">
                                                         <div class="product-name barcode-productname">
-                                                            <?php echo $company_name;?>
+                                                           R3XTNK BROTHERS (PVT) LTD
                                                         </div>
                                                         <span class="model-name barcode-modelname"><?php echo $product_model;?></span>
                                                         <img src="<?php echo base_url('my-assets/image/qr/'.$qr_image) ?>" class="img-responsive center-block qrcode-image" alt="">
