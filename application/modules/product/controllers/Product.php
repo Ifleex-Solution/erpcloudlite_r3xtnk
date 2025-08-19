@@ -329,7 +329,7 @@ class Product extends MX_Controller
         $data['product_open']   = null;
         #-------------------------------#
         $this->form_validation->set_rules('product_name', display('product_name'), 'required|max_length[200]');
-        $this->form_validation->set_rules('subcategory_id','Subcategory', 'required|max_length[20]');
+        $this->form_validation->set_rules('subcategory_id', 'Subcategory', 'required|max_length[20]');
         $this->form_validation->set_rules('unit', display('unit'), 'required');
         $this->form_validation->set_rules('status', "Status", 'required');
         $this->form_validation->set_rules('store', "Store", 'required');
@@ -808,6 +808,13 @@ class Product extends MX_Controller
     public function barcode_print($product_id)
     {
         $product_info = $this->product_model->bdtask_barcode_productdata($product_id);
+
+        $logFilePath = 'logfile.log';
+        $fileHandle = fopen($logFilePath, 'a');
+        $logMessage = json_encode($product_info);
+        fwrite($fileHandle,"product". $logMessage . "\n");
+        fclose($fileHandle);
+
 
         $data = array(
             'title'           => display('barcode'),
@@ -1383,7 +1390,7 @@ class Product extends MX_Controller
                 $data = [
                     'status' => 0  // or whatever value you want to update
                 ];
-                
+
                 $this->db->where('product', $this->input->post('product_id', true));
                 $this->db->update('conversion_ratio', $data);
                 if ($this->product_model->create_conversionratio($postData)) {
@@ -1485,6 +1492,4 @@ class Product extends MX_Controller
            </script>';
         }
     }
-
-
 }

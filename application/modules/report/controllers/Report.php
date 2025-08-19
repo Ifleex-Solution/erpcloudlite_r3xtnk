@@ -1437,7 +1437,8 @@ SUM(CASE  WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  > 0  THEN AES_D
 SUM(CASE WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  < 0 THEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  ELSE 0  END) AS outqty,
 SUM(AES_DECRYPT(sd.stock,'" . $encryption_key . "')) as avqty, NULL AS pinqty,NULL AS poutqty,NULL AS pavqty,AES_DECRYPT(pi.cost_price, '" . $encryption_key . "') as purchase_price,AES_DECRYPT(pi.price, '" . $encryption_key . "') as sale_price,pi.category_id
 from product_information pi
-INNER JOIN product_category pc on pc.category_id=pi.category_id
+INNER JOIN product_subcategory ps on ps.subcategory_id =pi.subcategory_id
+INNER JOIN product_category pc on pc.category_id=ps.category_id
 INNER JOIN stock_details sd on sd.product=pi.id
 WHERE sd.date BETWEEN '$from_date' AND '$to_date'" . $sqljoin . "
 GROUP By pi.id
@@ -1450,7 +1451,8 @@ SUM(CASE  WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  > 0  THEN AES_D
 SUM(CASE WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  < 0 THEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  ELSE 0  END) AS poutqty,
 SUM(AES_DECRYPT(sd.stock,'" . $encryption_key . "')) as pavqty,AES_DECRYPT(pi.cost_price, '" . $encryption_key . "') as purchase_price,AES_DECRYPT(pi.price, '" . $encryption_key . "') as sale_price,pi.category_id
 from product_information pi
-INNER JOIN product_category pc on pc.category_id=pi.category_id
+INNER JOIN product_subcategory ps on ps.subcategory_id =pi.subcategory_id
+INNER JOIN product_category pc on pc.category_id=ps.category_id
 INNER JOIN phystock_details sd on sd.product=pi.id
 WHERE sd.date BETWEEN '$from_date' AND '$to_date'" . $sqljoin . "
 GROUP By pi.id) AS stock_data
@@ -1467,7 +1469,8 @@ SUM(CASE  WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  > 0  THEN AES_D
 SUM(CASE WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  < 0 THEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  ELSE 0  END) AS outqty,
 SUM(AES_DECRYPT(sd.stock,'" . $encryption_key . "')) as avqty,AES_DECRYPT(pi.cost_price, '" . $encryption_key . "') as purchase_price,AES_DECRYPT(pi.price, '" . $encryption_key . "') as sale_price,pi.category_id
 from product_information pi
-INNER JOIN product_category pc on pc.category_id=pi.category_id
+INNER JOIN product_subcategory ps on ps.subcategory_id =pi.subcategory_id
+INNER JOIN product_category pc on pc.category_id=ps.category_id
 INNER JOIN stock_details sd on sd.product=pi.id
 WHERE sd.date BETWEEN '$from_date' AND '$to_date'" . $sqljoin . "
 GROUP By pi.id";
@@ -1482,7 +1485,8 @@ SUM(CASE  WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  > 0  THEN AES_D
 SUM(CASE WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  < 0 THEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  ELSE 0  END) AS poutqty,
 SUM(AES_DECRYPT(sd.stock,'" . $encryption_key . "')) as pavqty,AES_DECRYPT(pi.cost_price, '" . $encryption_key . "') as purchase_price,AES_DECRYPT(pi.price, '" . $encryption_key . "') as sale_price,pi.category_id
 from product_information pi
-INNER JOIN product_category pc on pc.category_id=pi.category_id
+INNER JOIN product_subcategory ps on ps.subcategory_id =pi.subcategory_id
+INNER JOIN product_category pc on pc.category_id=ps.category_id
 INNER JOIN phystock_details sd on sd.product=pi.id
 WHERE sd.date BETWEEN '$from_date' AND '$to_date'" . $sqljoin . "
 GROUP By pi.id";
@@ -1565,7 +1569,8 @@ SUM(CASE  WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  > 0  THEN AES_D
 SUM(CASE WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  < 0 THEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  ELSE 0  END) AS outqty,
 SUM(AES_DECRYPT(sd.stock,'" . $encryption_key . "')) as avqty, NULL AS pinqty,NULL AS poutqty,NULL AS pavqty,AES_DECRYPT(pi.cost_price, '" . $encryption_key . "') as purchase_price,AES_DECRYPT(pi.price, '" . $encryption_key . "') as sale_price,pi.category_id
 from product_information pi
-INNER JOIN product_category pc on pc.category_id=pi.category_id
+INNER JOIN product_subcategory ps on ps.subcategory_id =pi.subcategory_id
+INNER JOIN product_category pc on pc.category_id=ps.category_id
 INNER JOIN stock_details sd on sd.product=pi.id
 WHERE sd.date " . $sqljoin . "
 GROUP By pi.id
@@ -1578,7 +1583,8 @@ SUM(CASE  WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  > 0  THEN AES_D
 SUM(CASE WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  < 0 THEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  ELSE 0  END) AS poutqty,
 SUM(AES_DECRYPT(sd.stock,'" . $encryption_key . "')) as pavqty,AES_DECRYPT(pi.cost_price, '" . $encryption_key . "') as purchase_price,AES_DECRYPT(pi.price, '" . $encryption_key . "') as sale_price,pi.category_id
 from product_information pi
-INNER JOIN product_category pc on pc.category_id=pi.category_id
+INNER JOIN product_subcategory ps on ps.subcategory_id =pi.subcategory_id
+INNER JOIN product_category pc on pc.category_id=ps.category_id
 INNER JOIN phystock_details sd on sd.product=pi.id
 WHERE pi.status=1 " . $sqljoin . "
 GROUP By pi.id) AS stock_data
@@ -1595,7 +1601,8 @@ SUM(CASE  WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  > 0  THEN AES_D
 SUM(CASE WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  < 0 THEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  ELSE 0  END) AS outqty,
 SUM(AES_DECRYPT(sd.stock,'" . $encryption_key . "')) as avqty,AES_DECRYPT(pi.cost_price, '" . $encryption_key . "') as purchase_price,AES_DECRYPT(pi.price, '" . $encryption_key . "') as sale_price,pi.category_id
 from product_information pi
-INNER JOIN product_category pc on pc.category_id=pi.category_id
+INNER JOIN product_subcategory ps on ps.subcategory_id =pi.subcategory_id
+INNER JOIN product_category pc on pc.category_id=ps.category_id
 INNER JOIN stock_details sd on sd.product=pi.id
 WHERE pi.status=1  " . $sqljoin . "
 GROUP By pi.id";
@@ -1610,7 +1617,8 @@ SUM(CASE  WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  > 0  THEN AES_D
 SUM(CASE WHEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  < 0 THEN AES_DECRYPT(sd.stock, '" . $encryption_key . "')  ELSE 0  END) AS poutqty,
 SUM(AES_DECRYPT(sd.stock,'" . $encryption_key . "')) as pavqty,AES_DECRYPT(pi.cost_price, '" . $encryption_key . "') as purchase_price,AES_DECRYPT(pi.price, '" . $encryption_key . "') as sale_price,pi.category_id
 from product_information pi
-INNER JOIN product_category pc on pc.category_id=pi.category_id
+INNER JOIN product_subcategory ps on ps.subcategory_id =pi.subcategory_id
+INNER JOIN product_category pc on pc.category_id=ps.category_id
 INNER JOIN phystock_details sd on sd.product=pi.id
 WHERE pi.status=1  " . $sqljoin . "
 GROUP By pi.id";
@@ -1866,9 +1874,13 @@ ORDER by createddate desc;";
 
 
 
-            $pdf->Cell(21, 10, number_format($row['purchase_price'], 2), 'TLB', 0, 'C', 0, '', 1);
-            $pdf->Cell(21, 10, number_format($row['sale_price'], 2), 'TLBR', 0, 'C', 0, '', 1);
-            $total_purchase =  $row['purchase_price'] * $row['avqty'];
+            // $pdf->Cell(21, 10, number_format($row['purchase_price'], 2), 'TLB', 0, 'C', 0, '', 1);
+            // $pdf->Cell(21, 10, number_format($row['sale_price'], 2), 'TLBR', 0, 'C', 0, '', 1);
+            // $total_purchase =  $row['purchase_price'] * $row['avqty'];
+
+            $pdf->Cell(21, 10, number_format($row['purchase_price'] != "" ? $row['purchase_price'] : 0, 2), 'TLB', 0, 'C', 0, '', 1);
+            $pdf->Cell(21, 10, number_format($row['sale_price'] != "" ? $row['sale_price'] : 0, 2), 'TLBR', 0, 'C', 0, '', 1);
+            $total_purchase = number_format($row['purchase_price'] != "" ? $row['purchase_price'] : 0, 2) * $row['avqty'];
             $total_sale =  $row['sale_price'] * $row['avqty'];
 
             if ($_SESSION['sr_istype2'] != "physicalstock") {
@@ -2014,9 +2026,9 @@ ORDER by createddate desc;";
 
 
 
-            $pdf->Cell(25, 10, number_format($row['purchase_price'], 2), 'TLB', 0, 'C', 0, '', 1);
-            $pdf->Cell(25, 10, number_format($row['sale_price'], 2), 'TLBR', 0, 'C', 0, '', 1);
-            $total_purchase =  $row['purchase_price'] * $row['avqty'];
+            $pdf->Cell(25, 10, number_format($row['purchase_price'] != "" ? $row['purchase_price'] : 0, 2), 'TLB', 0, 'C', 0, '', 1);
+            $pdf->Cell(25, 10, number_format($row['sale_price'] != "" ? $row['sale_price'] : 0, 2), 'TLBR', 0, 'C', 0, '', 1);
+            $total_purchase = number_format($row['purchase_price'] != "" ? $row['purchase_price'] : 0, 2) * $row['avqty'];
             $total_sale =  $row['sale_price'] * $row['avqty'];
 
             if ($_SESSION['sr_istype2'] != "physicalstock") {

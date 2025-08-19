@@ -845,7 +845,8 @@ class Report_model extends CI_Model
         d.date, c.category_name");
         $this->db->from('purchase_details a');
         $this->db->join('product_information b', 'b.id = a.product');
-        $this->db->join('product_category c', 'c.category_id = b.category_id');
+        $this->db->join('product_subcategory ps', 'ps.subcategory_id =b.subcategory_id');
+        $this->db->join('product_category c', 'c.category_id = ps.category_id');
         $this->db->join('purchase d', 'd.id = a.pid');
         $this->db->where('d.date >=', $from_date);
         $this->db->where('d.date <=', $to_date);
@@ -963,7 +964,8 @@ class Report_model extends CI_Model
         d.date, c.category_name");
         $this->db->from('sale_details a');
         $this->db->join('product_information b', 'b.id = a.product');
-        $this->db->join('product_category c', 'c.category_id = b.category_id');
+        $this->db->join('product_subcategory ps', 'ps.subcategory_id =b.subcategory_id');
+        $this->db->join('product_category c', 'c.category_id = ps.category_id');
         $this->db->join('sale d', 'd.id = a.pid');
         $this->db->where('d.date >=', $from_date);
         $this->db->where('d.date <=', $to_date);

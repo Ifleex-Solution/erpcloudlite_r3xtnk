@@ -345,8 +345,8 @@ class Product_model extends CI_Model
         ## Total number of records without filtering
         $this->db->select('count(*) as allcount');
         $this->db->from('product_information a');
-        $this->db->join('product_category c', 'c.category_id = a.category_id');
-
+$this->db->join('product_subcategory ps', 'ps.subcategory_id =a.subcategory_id');
+        $this->db->join('product_category c', 'c.category_id = ps.category_id');
 
         if ($searchValue != '')
             $this->db->where($searchQuery);
@@ -356,8 +356,8 @@ class Product_model extends CI_Model
         ## Total number of record with filtering
         $this->db->select('count(*) as allcount');
         $this->db->from('product_information a');
-        $this->db->join('product_category c', 'c.category_id = a.category_id');
-
+$this->db->join('product_subcategory ps', 'ps.subcategory_id =a.subcategory_id');
+        $this->db->join('product_category c', 'c.category_id = ps.category_id');
         if ($searchValue != '')
             $this->db->where($searchQuery);
         $records = $this->db->get()->result();
@@ -368,14 +368,16 @@ class Product_model extends CI_Model
         $this->db->select("
         a.id as id,
                 a.product_name as product_name,
-                a.product_id as product_id,c.subcategory_name as category_name ,
+                a.product_id as product_id,c.category_name as category_name ,
                 AES_DECRYPT(a.price, '{$encryption_key}') AS price ,
                 AES_DECRYPT(a.cost_price, '{$encryption_key}') AS cost_price,
 IF(a.status = 1, 'Active', 'Inactive') as status_label,s.name as sname");
         $this->db->from('product_information a');
         $this->db->join('store s', 's.id = a.store');
 
-        $this->db->join('product_subcategory c', 'c.subcategory_id = a.subcategory_id');
+           $this->db->join('product_subcategory ps', 'ps.subcategory_id =a.subcategory_id');
+        $this->db->join('product_category c', 'c.category_id = ps.category_id');
+
 
 
         if ($searchValue != '')
@@ -492,7 +494,7 @@ IF(a.status = 1, 'Active', 'Inactive') as status_label,s.name as sname");
                 AES_DECRYPT(price, '{$encryption_key}') AS price ,
                 AES_DECRYPT(cost_price, '{$encryption_key}') AS cost_price")
             ->from('product_information')
-            ->where('id', $id)
+            ->where('product_id', $id)
             ->get()
             ->result_array();
     }
